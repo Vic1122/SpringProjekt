@@ -1,19 +1,45 @@
 package com.Vic1122.Library.domain;
 
-import org.springframework.stereotype.Component;
+//import javax.persistence.*;
 
-@Component
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Book {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@Column(name = "book_id")
+    private int id;
+    //@Column(name = "book_title")
     private String title;
+    //@Column(name = "year_of_publishing")
     private int yearOfPublisging;
+    //@Column(name = "publisher")
     private String publisher;
+    //@Column(name = "isbn")
     private String isbn;
 
     public Book(){
-        this.title = "AAA";
-        this.yearOfPublisging = 1234;
-        this.publisher = "Alto";
-        this.isbn = "QWS23443";
+
+    }
+
+    public Book(String title, int yearOfPublisging, String publisher,String isbn){
+        this.title = title;
+        this.yearOfPublisging = yearOfPublisging;
+        this.publisher = publisher;
+        this.isbn = isbn;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -24,7 +50,7 @@ public class Book {
         this.title = title;
     }
 
-    public int getYearOfPublisging() {
+    public int getYearOfPublishging() {
         return yearOfPublisging;
     }
 
