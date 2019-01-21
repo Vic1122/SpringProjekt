@@ -28,4 +28,8 @@ public class BookRepository {
             em.persist(book);
     }
 
+    public void deleteBook(int id){
+        em.remove(id);
+    }
+
 }
