@@ -23,15 +23,18 @@ public class Book {
     //@Column(name = "isbn")
     private String isbn;
 
+    private String author;
+
     public Book(){
 
     }
 
-    public Book(String title, int yearOfPublisging, String publisher,String isbn){
+    public Book(String title, int yearOfPublisging, String publisher,String isbn, String author){
         this.title = title;
         this.yearOfPublisging = yearOfPublisging;
         this.publisher = publisher;
         this.isbn = isbn;
+        this.author = author;
     }
 
     public int getId() {
@@ -74,13 +77,27 @@ public class Book {
         this.isbn = isbn;
     }
 
+    public int getYearOfPublisging() {
+        return yearOfPublisging;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
-                "title='" + title + '\'' +
+                "id=" + id +
+                ", title='" + title + '\'' +
                 ", yearOfPublisging=" + yearOfPublisging +
                 ", publisher='" + publisher + '\'' +
                 ", isbn='" + isbn + '\'' +
+                ", author='" + author + '\'' +
                 '}';
     }
 }

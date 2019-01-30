@@ -22,14 +22,22 @@ public class BookRepository {
         return em.find(Book.class, id);
     }
 
-    @Transactional
+    @Transactional//jak robi się transakcję CUD
     public void saveBook(Book book){
         if(book!=null)
             em.persist(book);
     }
 
-    public void deleteBook(int id){
-        em.remove(id);
+    @Transactional
+    public void removeBook(Book book){
+        if(book != null)
+            em.remove(book);
+    }
+
+    @Transactional
+    public void updateBook(Book book){
+        if(book != null)
+            em.merge(book);
     }
 
 }
