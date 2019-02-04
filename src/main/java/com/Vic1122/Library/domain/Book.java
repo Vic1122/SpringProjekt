@@ -2,10 +2,12 @@ package com.Vic1122.Library.domain;
 
 //import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.hibernate.validator.constraints.Range;
+
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Book {
@@ -15,21 +17,26 @@ public class Book {
     //@Column(name = "book_id")
     private int id;
     //@Column(name = "book_title")
+    @Size(min=2, message = "Tytuł musi mieć conajmniej dwie litery")
+    @NotNull(message = "Dana wymagana")
     private String title;
     //@Column(name = "year_of_publishing")
+    @NotNull(message = "Dana wymagana")
+    @Range(min=1, max=9999, message = "Niedpowiedni rok wydania")
     private int yearOfPublisging;
     //@Column(name = "publisher")
     private String publisher;
     //@Column(name = "isbn")
     private String isbn;
 
-    private String author;
+    @OneToOne
+    private Author author;
 
     public Book(){
 
     }
 
-    public Book(String title, int yearOfPublisging, String publisher,String isbn, String author){
+    public Book(String title, int yearOfPublisging, String publisher,String isbn, Author author){
         this.title = title;
         this.yearOfPublisging = yearOfPublisging;
         this.publisher = publisher;
@@ -81,11 +88,11 @@ public class Book {
         return yearOfPublisging;
     }
 
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 

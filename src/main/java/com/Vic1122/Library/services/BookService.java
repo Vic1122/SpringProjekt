@@ -1,6 +1,8 @@
 package com.Vic1122.Library.services;
 
+import com.Vic1122.Library.domain.Author;
 import com.Vic1122.Library.domain.Book;
+import com.Vic1122.Library.repository.AuthorRepository;
 import com.Vic1122.Library.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,19 +16,43 @@ public class BookService {
     @Autowired
     BookRepository bookRepository;
 
+    @Autowired
+    AuthorRepository authorRepository;
+
     public List<Book> getBooks(){
         return new ArrayList<>(bookRepository.getBooks());
     }
 
     public void saveBook(Book book){
-        bookRepository.saveBook(book);
+        if(book!=null) {
+            System.out.println("Zapisuję książkę i id: " + book.getId());
+            boolean bookExists = bookRepository.getBook(book.getId()) != null;
+
+            if(bookExists) {
+                authorRepository.updateAuthor(book.getAuthor());
+                bookRepository.updateBook(book);
+            }else {
+                authorRepository.saveAuthor(book.getAuthor());
+                bookRepository.saveBook(book);
+            }
+        }
     }
 
     public void removeBook(int id){
-        bookRepository.removeBook(bookRepository.getBook(id));
+        Book bookRemove = bookRepository.getBook(id);
+        Author authorToRemove = bookRemove.getAuthor();
+
+        bookRepository.removeBook(bookRemove);
+        authorRepository.removeAuthor(authorToRemove);
     }
 
     public Book getNevBook(){
-        return new Book();
+        Book newBook = new Book();
+        newBook.setAuthor(new Author());
+        return newBook;
+    }
+
+    public Book getBook(int id){
+        return bookRepository.getBook(id);
     }
 }
