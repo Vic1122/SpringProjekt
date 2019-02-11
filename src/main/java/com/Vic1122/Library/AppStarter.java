@@ -24,8 +24,8 @@ public class AppStarter implements CommandLineRunner{
     }
 
     public void init(){
-        Book book = new Book("poopapp", 1234,"uuiis", "55ss663ew", new Author("Mirek spod monopolowego"));
-        Book book2 = new Book("p222oopapp", 1234,"uuiis", "55ss663ew", new Author("Mirek spod monopolowego"));
+        Book book = new Book("poopapp", 1234,"uuiis", "2121ww21ee123", new Author("Mirek spod monopolowego"));
+        Book book2 = new Book("p222oopapp", 1234,"uuiis", "2121ww21ee123", new Author("Mirek spod monopolowego"));
         bookService.saveBook(book);
         bookService.saveBook(book2);
     }

@@ -5,7 +5,9 @@ package com.Vic1122.Library.domain;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -25,12 +27,16 @@ public class Book {
     @Range(min=1, max=9999, message = "Niedpowiedni rok wydania")
     private int yearOfPublisging;
     //@Column(name = "publisher")
+    @NotEmpty(message = "Dana wymagana")
     private String publisher;
     //@Column(name = "isbn")
+    @NotEmpty(message = "Dana wymagana")
+    @Size(min=13, max=13, message = "Niepoprawny numer ISBN")
     private String isbn;
 
     @OneToOne
-    private Author author;
+    //@NotEmpty(message = "Dana wymagana")
+    private @Valid Author author;
 
     public Book(){
 
@@ -92,7 +98,7 @@ public class Book {
         return author;
     }
 
-    public void setAuthor(Author author) {
+    public void setAuthor( Author author) {
         this.author = author;
     }
 
