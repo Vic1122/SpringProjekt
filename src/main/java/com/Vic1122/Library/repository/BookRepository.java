@@ -40,4 +40,11 @@ public class BookRepository {
             em.merge(book);
     }
 
+
+    public Collection<Book> getBooksByAuthor(String authorName){
+        return em.createQuery("from Book b WHERE b.author.name = :authorName", Book.class)
+                .setParameter("authorName", authorName)
+                .getResultList();
+    }
+
 }

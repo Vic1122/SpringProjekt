@@ -13,6 +13,7 @@
     <div class="container">
         <form class="form-horizontal" th:object="${book}" th:action="@{/books}" th:method="post">
             <input type="hidden" th:field="*{id}">
+            <input type="hidden" th:field="*{author.id}">
             <div class="form-group">
                 <label class="control-lable">Tytuł</label>
                 <input type="text" class="form-control" th:field="*{title}"/>
@@ -21,8 +22,8 @@
 
             <div class="form-group">
                 <label class="control-lable">Rok Wydania</label>
-                <input type="number" class="form-control" th:if="${book.yearOfPublisging > 0}" th:field="*{yearOfPublisging}"/>
-                <input type="number" class="form-control" th:if="${book.yearOfPublisging <= 0}" th:id="yearOfPublisging" th:name="yearOfPublisging"/>
+                <input type="text" class="form-control" th:if="${book.yearOfPublisging > 0}" th:field="*{yearOfPublisging}"/>
+                <input type="text" class="form-control" th:if="${book.yearOfPublisging <= 0}" th:id="yearOfPublisging" th:name="yearOfPublisging" th:value="1"/>
                 <p th:if="${#fields.hasErrors('yearOfPublisging')}" th:errors="*{yearOfPublisging}"/>
             </div>
 
