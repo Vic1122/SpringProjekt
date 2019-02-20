@@ -68,9 +68,9 @@ public class Book {
         this.title = title;
     }
 
-    public Integer getYearOfPublishging() {
-        return yearOfPublisging;
-    }
+//    public Integer getYearOfPublishging() {
+//        return yearOfPublisging;
+//    }
 
     public void setYearOfPublisging(Integer yearOfPublisging) {
         this.yearOfPublisging = yearOfPublisging;

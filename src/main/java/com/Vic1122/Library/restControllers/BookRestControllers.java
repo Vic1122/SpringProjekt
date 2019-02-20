@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -75,15 +76,33 @@ public class BookRestControllers {
         return new ResponseEntity<>(book, HttpStatus.OK);
 
     }
+    @RequestMapping(value = "/books/getByAuthor", method = RequestMethod.GET)
+    public ResponseEntity<List<Book>> getBooksByAuthor (@RequestParam(name="author", required = true) String authorName){
+        List<Book> books = bookService.getBooksByAuthor(authorName);
+            if(books == null)
+                return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-//    @RequestMapping(value = "/books/{id}", method = RequestMethod.GET)
-//    public ResponseEntity<Book> getBooksByAuthor(@PathVariable("authorName") String authorName){
-//
-//        Book book = bookService.getBooksByAuthor(authorName);
-//        if( book == null )
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//
-//        return new ResponseEntity<>(book, HttpStatus.OK);
-//
-//    }
+            return new ResponseEntity<>(books, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/books/get", method = RequestMethod.GET)
+    public ResponseEntity<List<Book>> getBooks(@RequestParam(value = "yearOfPublisging", required = false) Integer yearOfPublisging,
+                                               @RequestParam(value = "isbn", required = false)  String isbn,
+                                               @RequestParam(value = "publisher", required = false) String publisher){
+
+        List<Book> books = bookService.getBooks(yearOfPublisging, isbn, publisher);
+        if(books == null)
+            return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+        return new ResponseEntity<>(books, HttpStatus.OK);
+
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<ExceptionDetail> exceptionHendler(MissingServletRequestParameterException ex) {
+
+        ExceptionDetail exceptionDetail = new ExceptionDetail(ex.getClass().getSimpleName(), ex.getMessage());
+
+        return new ResponseEntity<>(exceptionDetail, HttpStatus.BAD_REQUEST);
+    }
 }
