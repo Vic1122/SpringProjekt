@@ -90,5 +90,12 @@ public class BookRepository {
 //                .setParameter("publisher", publisher)
 //                .getResultList();
     }
+    public Collection<Book> getBooksByTitle(String title) {
+
+       return em.createQuery("from Book b WHERE LOWER(b.title) LIKE CONCAT('%',:title,'%')", Book.class)
+               .setParameter("title", title.toLowerCase())
+               .getResultList();
+
+    }
 
 }
