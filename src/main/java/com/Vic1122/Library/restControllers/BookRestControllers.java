@@ -1,7 +1,9 @@
 package com.Vic1122.Library.restControllers;
 
 import com.Vic1122.Library.domain.Book;
+import com.Vic1122.Library.dto.BookDto;
 import com.Vic1122.Library.services.BookService;
+import com.Vic1122.Library.utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,9 @@ public class BookRestControllers {
 
     @Autowired
     BookService bookService;
+
+    @Autowired
+    Mapper mapper;
 
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public ResponseEntity<List<Book>> getBooks(){
@@ -40,8 +45,8 @@ public class BookRestControllers {
     }
 
     @RequestMapping(value="/books/add", method = RequestMethod.POST)
-    public ResponseEntity<Void> addBook(@RequestBody Book book){
-
+    public ResponseEntity<Void> addBook(@RequestBody BookDto bookDto){
+        Book book = mapper.convertToEntity(bookDto);
         if( book == null )
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
@@ -50,8 +55,8 @@ public class BookRestControllers {
     }
 
     @RequestMapping(value = "/books/edit/{id}", method = RequestMethod.POST)
-    public ResponseEntity<Void> editBook(@PathVariable("id") int id, @RequestBody Book book) {
-
+    public ResponseEntity<Void> editBook(@PathVariable("id") int id, @RequestBody BookDto bookDto) {
+        Book book = mapper.convertToEntity(bookDto);
         Book updateBook = bookService.getBook(id);
         if( updateBook == null )
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
