@@ -22,9 +22,9 @@
 
             <div class="form-group">
                 <label class="control-lable">Rok Wydania</label>
-                <input type="text" class="form-control" th:if="${book.yearOfPublisging > 0}" th:field="*{yearOfPublisging}"/>
-                <input type="text" class="form-control" th:if="${book.yearOfPublisging <= 0}" th:id="yearOfPublisging" th:name="yearOfPublisging" th:value="1"/>
-                <p th:if="${#fields.hasErrors('yearOfPublisging')}" th:errors="*{yearOfPublisging}"/>
+                <input type="text" class="form-control" th:if="${book.yearOfPublishing > 0}" th:field="*{yearOfPublishing}"/>
+                <input type="text" class="form-control" th:if="${book.yearOfPublishing <= 0}" th:id="yearOfPublishing" th:name="yearOfPublishing" th:value="1"/>
+                <p th:if="${#fields.hasErrors('yearOfPublishing')}" th:errors="*{yearOfPublishing}"/>
             </div>
 
             <div class="form-group">

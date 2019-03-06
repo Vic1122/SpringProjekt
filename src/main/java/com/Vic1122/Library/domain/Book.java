@@ -24,7 +24,7 @@ public class Book {
     @Min(value = 1, message = "Niedpowiedni rok wydania")
     @Max(value = 9999, message = "Niedpowiedni rok wydania")
     @NotNull(message = "Dana wymagana")
-    private Integer yearOfPublisging;
+    private Integer yearOfPublishing;
 
     //@Column(name = "publisher")
     @NotEmpty(message = "Dana wymagana")
@@ -44,9 +44,9 @@ public class Book {
 
     }
 
-    public Book(String title, Integer yearOfPublisging, String publisher,String isbn, Author author){
+    public Book(String title, Integer yearOfPublishing, String publisher, String isbn, Author author){
         this.title = title;
-        this.yearOfPublisging = yearOfPublisging;
+        this.yearOfPublishing = yearOfPublishing;
         this.publisher = publisher;
         this.isbn = isbn;
         this.author = author;
@@ -69,11 +69,11 @@ public class Book {
     }
 
 //    public Integer getYearOfPublishging() {
-//        return yearOfPublisging;
+//        return yearOfPublishing;
 //    }
 
-    public void setYearOfPublisging(Integer yearOfPublisging) {
-        this.yearOfPublisging = yearOfPublisging;
+    public void setYearOfPublishing(Integer yearOfPublishing) {
+        this.yearOfPublishing = yearOfPublishing;
     }
 
     public String getPublisher() {
@@ -92,8 +92,8 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public Integer getYearOfPublisging() {
-        return yearOfPublisging;
+    public Integer getYearOfPublishing() {
+        return yearOfPublishing;
     }
 
     public Author getAuthor() {
@@ -109,7 +109,7 @@ public class Book {
         return "Book{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", yearOfPublisging=" + yearOfPublisging +
+                ", yearOfPublishing=" + yearOfPublishing +
                 ", publisher='" + publisher + '\'' +
                 ", isbn='" + isbn + '\'' +
                 ", author='" + author + '\'' +
