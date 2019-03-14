@@ -5,6 +5,7 @@ package com.Vic1122.Library.domain;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import java.util.Set;
 
 @Entity
 public class Book {
@@ -38,7 +39,9 @@ public class Book {
     @OneToOne
     //@NotEmpty(message = "Dana wymagana")
     private @Valid Author author;
-    //private Author author;
+
+    @OneToMany(mappedBy = "hiredBook", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Here> here;
 
     public Book(){
 
