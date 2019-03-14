@@ -3,13 +3,10 @@ package com.Vic1122.Library;
 
 import com.Vic1122.Library.domain.Author;
 import com.Vic1122.Library.domain.Book;
-import com.Vic1122.Library.domain.User;
 import com.Vic1122.Library.services.BookService;
 import com.Vic1122.Library.services.UserService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -34,7 +31,8 @@ public class AppStarter implements CommandLineRunner {
         bookService.saveBook(book);
         bookService.saveBook(book2);
     }
-    public void initUsers(){
+
+    public void initUsers() {
         userService.createUser("admin", "pass");
 
         userService.addRoleToUser("admin", "ADMIN");

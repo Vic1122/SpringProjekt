@@ -4,36 +4,29 @@ import com.Vic1122.Library.domain.Role;
 import com.Vic1122.Library.domain.User;
 import com.Vic1122.Library.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-
 @Service
-@Transactional
 public class UserService {
 
     @Autowired
     UserRepository userRepository;
 
-    public void createUser(String userName, String password){
-        if(userName != null && password != null){
-            User user = userRepository.getUser(userName);
-            //System.out.println(">>>>>>>>>>>>>>>" + user.getRoles() == null);
-            if(user == null) {
-                User newUser = new User(userName, password);
-                userRepository.addUser(newUser);
-            }
+    public void createUser(String userName, String password) {
+        if (userName != null && password != null) {
+            PasswordEncoder pe = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+            User newUser = new User(userName, pe.encode(password));
+            userRepository.addUser(newUser);
         }
 
     }
-    public void addRoleToUser(String userName, String roleName){
-        if(userName != null && roleName != null){
-            User user = userRepository.getUser(userName);
 
-            if (user != null){
-                Role role = new Role(roleName);
-                userRepository.addRoleToUser(user, role);
-            }
+    public void addRoleToUser(String userName, String roleName) {
+        if(userName != null && roleName != null) {
+            Role role = new Role(roleName);
+            userRepository.addRoleToUser(userName, role);
         }
 
     }

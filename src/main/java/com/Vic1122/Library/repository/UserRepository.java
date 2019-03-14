@@ -16,29 +16,36 @@ public class UserRepository {
     private EntityManager em;
 
     @Transactional
-    public void addUser(User user){
-        if(user!= null)
-            em.persist(user);
-    }
+    public void addUser(User user) {
+        if (user != null) {
+            boolean userExists = getUser(user.getUserName()) != null;
 
-    @Transactional
-    public void addRoleToUser(User user, Role role){
-        if(user != null && role != null) {
-            user.addRole(role);
-            role.setUser(user);
-            em.persist(role);
-            em.merge(user);
+            if (!userExists)
+                em.persist(user);
         }
     }
 
-    public User getUser(String userName){
+    @Transactional
+    public void addRoleToUser(String userName, Role role) {
+        if (userName != null && role != null) {
+            User user = getUser(userName);
+            if(user != null) {
+                user.addRole(role);
+                role.setUser(user);
+                em.persist(role);
+                em.merge(user);
+            }
+        }
+    }
+
+    public User getUser(String userName) {
         List<User> users = em.createQuery("from User u where u.userName = :userName", User.class)
                 .setParameter("userName", userName)
                 .getResultList();
 
-        if(users == null)
+        if (users == null)
             return null;
-        if(users.isEmpty())
+        if (users.isEmpty())
             return null;
 
         return users.get(0);
