@@ -32,7 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").hasAnyAuthority("ADMIN", "USER")
                 .antMatchers("/books").hasAnyAuthority("ADMIN", "USER")
                 .antMatchers("/books/api").hasAnyAuthority("ADMIN", "DEV")
-                .anyRequest().authenticated().and().formLogin().defaultSuccessUrl("/books");
+                .anyRequest().authenticated()
+                .and().formLogin().defaultSuccessUrl("/books")
+                .and().httpBasic();
 
         httpSecurity.headers().frameOptions().disable();
         httpSecurity.csrf().ignoringAntMatchers("/h2-console/**");

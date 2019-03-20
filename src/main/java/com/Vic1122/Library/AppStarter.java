@@ -4,6 +4,7 @@ package com.Vic1122.Library;
 import com.Vic1122.Library.domain.Author;
 import com.Vic1122.Library.domain.Book;
 import com.Vic1122.Library.services.BookService;
+import com.Vic1122.Library.services.HireService;
 import com.Vic1122.Library.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -19,10 +20,12 @@ public class AppStarter implements CommandLineRunner {
     @Autowired
     UserService userService;
 
+    @Autowired
+    HireService hireService;
+
     @Override
     public void run(String... args) throws Exception {
-        //init();
-        //initUsers();
+        System.out.println(hireService.getHiresByBookId(2).size());
     }
 
     public void init() {

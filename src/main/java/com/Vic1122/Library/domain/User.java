@@ -15,6 +15,8 @@ public class User {
     private Boolean enable;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Role> roles;
+    private String firstName;
+    private String lastName;
 
     public User() {
         this.roles = new ArrayList<>();
@@ -25,6 +27,22 @@ public class User {
         this.password = password;
         this.enable = true;
         this.roles = new ArrayList<>();
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public List<Role> getRoles() {

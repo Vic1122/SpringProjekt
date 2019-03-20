@@ -10,10 +10,17 @@
     <script th:src="@{/webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
 </head>
 <body>
+
 <div class="container">
-    <div class="row">
+    <div >
+
+    </div>
+    <div class="float-left">
+        <p th:text="${'Witaj, '+ user.firstName+' ' + user.lastName + ' ('+user.userName+')'}"></p>
+    </div>
+    <div class="float-right">
         <form action="#" th:action="@{/logout}" method="post">
-            <button type="submit" class="btn btn-primary float-right">Wyloguj</button>
+            <button type="submit" class="btn btn-primary">Wyloguj</button>
         </form>
     </div>
     <table class="table table-striped">
@@ -23,16 +30,18 @@
         <th>IBAN</th>
         <th>Autor</th>
         <th>Wydawca</th>
+        <th>Wyporzyczenia</th>
         <th></th>
         <th></th>
         </thead>
         <tbody th:each="element : ${books}">
         <tr>
-            <td th:text=${element.title}></td>
-            <td th:text=${element.yearOfPublisging}></td>
-            <td th:text=${element.publisher}></td>
-            <td th:text=${element.isbn}></td>
-            <td th:text=${element.author.name}></td>
+            <td th:text="${element.title}"></td>
+            <td th:text="${element.yearOfPublishing}"></td>
+            <td th:text="${element.publisher}"></td>
+            <td th:text="${element.isbn}"></td>
+            <td th:text="${element.author.name}"></td>
+            <td><a th:href="${'/books/hire/' + element.id}">Pokaż</a></td>
             <td><a th:href="${'/books/edit/' + element.id}">Edytuj</a></td>
             <td><a th:href="${'/books/delete/' + element.id}">Usuń</a></td>
         </tr>

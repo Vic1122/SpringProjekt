@@ -41,7 +41,7 @@ public class Book {
     private @Valid Author author;
 
     @OneToMany(mappedBy = "hiredBook", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Here> here;
+    private Set<Hire> hire;
 
     public Book(){
 
